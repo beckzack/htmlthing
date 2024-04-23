@@ -1,0 +1,40 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><h1 id="b-tree-text-description">B-Tree Text Description</h1>
+<h2 id="properties-of-nodes">Properties of Nodes</h2>
+<p>This B-Tree structure defined within this program has the following properties:</p>
+<ul>
+<li>Each node has only one parent except root which has none.</li>
+<li>Every node except root has a number of entries, e, equal to T-1 &lt;= e &lt;= 2T-1. Root has 1 &lt;= e &lt;= 2T-1.</li>
+<li>Entries are defined as key-value pairs and are sorted by keys from least to greatest.</li>
+<li>Every Non-Leaf node except root has a number of children, c, such that T &lt;= c &lt;= 2T. Root has 1 &lt;= c &lt;= 2T.</li>
+<li>Children are sorted in relation to the parents keys, k, so that the keys of the child at index i, are ki &lt; c_i &lt; ki+1.</li>
+</ul>
+<h2 id="insertion">Insertion</h2>
+<p>Insertion happens in the leaf nodes but starts at the root and runs recursively.</p>
+<ol>
+<li>A node takes a given key and searches amongst its entries, k, finding an index, i, that satisfies  ki &lt; new key &lt; ki+1.</li>
+<li>If the node is a non-leaf it sends the insert down to its child at index i.</li>
+<li>If the node is a leaf it inserts the new entry between ki and ki+1.</li>
+<li>Afterwards we check if the node has 2T-1 entries.</li>
+<li>If so then we split the node into nodes A and B such that k0 &lt;= A<sub>k</sub> &lt; k<sub>T</sub> &lt; B<sub>k</sub> &lt;= k2T-1. The remaining entry k<sub>T</sub> is returned to the parent.</li>
+<li>The parent node then inserts the returned entry k<sub>T</sub> at index i+1 and stores A<sub>k</sub> at i and B<sub>k</sub> at i+1.</li>
+<li>Repeat steps 4-6 until the root node has been checked.</li>
+<li>If root is needs to split we create a new non-leaf node and set it as the parent of the root node. Then proceed with steps 5 and 6. The new non-leaf node is now the root.</li>
+</ol>
+<h2 id="search">Search</h2>
+<p>Searching for an entry by key is relatively straight forward. Proceeding the same as an insert except we stop when we find a match. $key = k$.</p>
+<h2 id="deletion">Deletion</h2>
+<p>Deleting a key-value pair can happen anywhere in the tree. This means its more involved.</p>
+<ol>
+<li>Proceed with a normal search.</li>
+<li>If the key is found in a leaf node; delete the key and shift the rest of the entries appropriately.</li>
+<li>Afterwards the parent must check if the node has at least T-1 entries.</li>
+<li>If the child node $ki$ has less than T-1 entries and if the sibling node k{i+1} has T entries or more.<ol>
+<li>The parent gives the key-value pair P<sub>i</sub> that divides </li>
+<li>first/last entry B<sub>e</sub> of the sibling such that</li>
+</ol>
+</li>
+</ol>
+</body></html>
